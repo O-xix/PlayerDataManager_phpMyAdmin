@@ -1,0 +1,105 @@
+-- 1. Top 5 items owned by a specific character in a specific game
+SELECT i.ItemID, i.Name, COUNT(*) AS ItemCount
+FROM Inventory inv
+JOIN Item i ON i.ItemID = inv.ItemID
+WHERE inv.AccountID = :p_acct
+  AND inv.Title = :p_title
+  AND inv.Studio = :p_studio
+  AND inv.CharName = :p_char
+GROUP BY i.ItemID, i.Name
+ORDER BY ItemCount DESC
+LIMIT 5;
+
+-- 2. Highest-level character for an account (assuming 'Level' is stored in CharacterStats)
+SELECT c.CharName, cs.StatValue AS Level
+FROM Characters c
+JOIN CharacterStats cs ON cs.AccountID = c.AccountID 
+                       AND cs.Title = c.Title 
+                       AND cs.Studio = c.Studio 
+                       AND cs.CharName = c.CharName
+WHERE c.AccountID = :p_acct
+  AND cs.StatName = 'Level'
+ORDER BY cs.StatValue DESC
+LIMIT 1;
+
+-- 3. Most popular build for a game
+SELECT pb.BuildID, b.Description, pb.UsagePercent
+FROM PopularBuilds pb
+JOIN Builds b ON pb.BuildID = b.BuildID
+WHERE pb.Title = :p_title AND pb.Studio = :p_studio
+ORDER BY pb.UsagePercent DESC
+LIMIT 1;
+
+-- 4. 5 least used items in a game
+SELECT iu.ItemID, i.Name, iu.UsagePercent
+FROM ItemUsage iu
+JOIN Item i ON i.ItemID = iu.ItemID
+WHERE iu.Title = :p_title AND iu.Studio = :p_studio
+ORDER BY iu.UsagePercent ASC
+LIMIT 5;
+
+-- 5. Average number of characters per account in a game
+SELECT AVG(char_cnt)::NUMERIC(5,2) AS avg_chars
+FROM (
+  SELECT AccountID, COUNT(*) AS char_cnt
+  FROM Characters
+  WHERE Title = :p_title AND Studio = :p_studio
+  GROUP BY AccountID
+) t;
+
+-- 6. Average health of characters in a game (assuming 'Health' is a stat)
+SELECT AVG(cs.StatValue)::NUMERIC(6,2) AS avg_health
+FROM CharacterStats cs
+WHERE cs.Title = :p_title AND cs.Studio = :p_studio
+  AND cs.StatName = 'Health';
+
+-- 7. Studio with the most unique account owners
+SELECT g.Studio, COUNT(DISTINCT a.AccountID) AS acct_cnt
+FROM Accounts a
+JOIN Characters c ON c.AccountID = a.AccountID
+JOIN Game g ON g.Title = c.Title AND g.Studio = c.Studio
+GROUP BY g.Studio
+ORDER BY acct_cnt DESC
+LIMIT 1;
+
+-- 8. Most popular build for the most owned game
+WITH top_game AS (
+  SELECT c.Title, c.Studio
+  FROM Characters c
+  GROUP BY c.Title, c.Studio
+  ORDER BY COUNT(DISTINCT c.AccountID) DESC
+  LIMIT 1
+)
+SELECT pb.BuildID, b.Description, pb.UsagePercent
+FROM PopularBuilds pb
+JOIN Builds b ON pb.BuildID = b.BuildID
+JOIN top_game tg ON pb.Title = tg.Title AND pb.Studio = tg.Studio
+ORDER BY pb.UsagePercent DESC
+LIMIT 1;
+
+-- 9. Distinct items used in the most owned game
+WITH top_game AS (
+  SELECT c.Title, c.Studio
+  FROM Characters c
+  GROUP BY c.Title, c.Studio
+  ORDER BY COUNT(DISTINCT c.AccountID) DESC
+  LIMIT 1
+)
+SELECT DISTINCT i.ItemID, i.Name
+FROM Inventory inv
+JOIN top_game tg ON inv.Title = tg.Title AND inv.Studio = tg.Studio
+JOIN Item i ON i.ItemID = inv.ItemID;
+
+-- 10. Price tier with the most owning accounts
+SELECT pr.Price, COUNT(DISTINCT c.AccountID) AS account_count
+FROM Characters c
+JOIN PlatformRelease pr ON pr.GameID = (
+    SELECT g.GameID
+    FROM Game g
+    WHERE g.Title = c.Title AND g.Studio = c.Studio
+)
+GROUP BY pr.Price
+ORDER BY account_count DESC
+LIMIT 1;
+
+

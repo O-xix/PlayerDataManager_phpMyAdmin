@@ -1,0 +1,152 @@
+-- Insert a new account
+INSERT INTO Accounts (AccountID, Username, Password)
+VALUES (1, 'user123', 'password');
+
+-- Update account password
+UPDATE Accounts
+SET Password = 'newpassword'
+WHERE AccountID = 1;
+
+-- Insert a new game
+INSERT INTO Game (GameID, Title, Studio, Genre, Rating)
+VALUES (101, 'Destiny', 'Bungie', 'RPG', 'T');
+
+-- Update the genre of a game
+UPDATE Game
+SET Genre = 'MMO'
+WHERE GameID = 101;
+
+-- Insert a platform release for a game
+INSERT INTO PlatformRelease (ReleaseID, GameID, Platform, Price, ReleaseDate)
+VALUES (201, 101, 'PlayStation 5', 69.99, '2024-11-15');
+
+-- Update the price of a platform release
+UPDATE PlatformRelease
+SET Price = 59.99
+WHERE ReleaseID = 201;
+
+-- Insert a new game statistics entry
+INSERT INTO GameStats (Title, Studio)
+VALUES ('Destiny', 'Bungie');
+
+-- Correct a typo in the game title
+UPDATE GameStats
+SET Title = 'Destiny 2'
+WHERE Title = 'Destony' AND Studio = 'Bungie';
+
+-- Insert a new item
+INSERT INTO Item (ItemID, Name, Description)
+VALUES (301, 'Ice Breaker', 'Generates Ammo');
+
+-- Update the item description
+UPDATE Item
+SET Description = 'Generates ammo upon precision damage'
+WHERE ItemID = 301;
+
+-- Insert item usage statistics
+INSERT INTO ItemUsage (Title, Studio, ItemID, UsagePercent)
+VALUES ('Destiny 2', 'Bungie', 301, 1.0);
+
+-- Update item usage percentage
+UPDATE ItemUsage
+SET UsagePercent = 2.0
+WHERE Title = 'Destiny 2' AND Studio = 'Bungie' AND ItemID = 301;
+
+-- Insert a new class
+INSERT INTO Classes (ClassName, Description)
+VALUES ('Hunter', 'Movement Based');
+
+-- Update class description
+UPDATE Classes
+SET Description = 'Movement based class with abilities'
+WHERE ClassName = 'Hunter';
+
+-- Insert class usage data
+INSERT INTO ClassUsage (Title, Studio, ClassName, UsagePercent)
+VALUES ('Destiny', 'Bungie', 'Hunter', 50.0);
+
+-- Update class usage percent
+UPDATE ClassUsage
+SET UsagePercent = 55.5
+WHERE Title = 'Destiny' AND Studio = 'Bungie' AND ClassName = 'Hunter';
+
+-- Insert a new build
+INSERT INTO Builds (BuildID, Description)
+VALUES (401, 'Solar Build: High DPS');
+
+-- Update build description
+UPDATE Builds
+SET Description = 'Solar Build: Uses Celestial Nighthawk for DPS'
+WHERE BuildID = 401;
+
+-- Insert popular build entry
+INSERT INTO PopularBuilds (Title, Studio, BuildID)
+VALUES ('Destiny 2', 'Bungie', 401);
+
+-- Update build ID in popular builds
+UPDATE PopularBuilds
+SET BuildID = 402
+WHERE Title = 'Destiny 2' AND Studio = 'Bungie' AND BuildID = 401;
+
+-- Insert a new character
+INSERT INTO Characters (AccountID, Studio, Title, CharName, Class)
+VALUES (1, 'Bungie', 'Destiny 2', 'Exo', 'Hunter');
+
+-- Update character's class
+UPDATE Characters
+SET Class = 'Titan'
+WHERE AccountID = 1 AND CharName = 'Exo';
+
+-- Insert game-class association
+INSERT INTO GameClass (Title, Studio, Class)
+VALUES ('Destiny', 'Bungie', 'Hunter');
+
+-- Update class name in GameClass (e.g., class renamed from Hunter to Titan)
+UPDATE GameClass
+SET Class = 'Titan'
+WHERE Title = 'Destiny' AND Studio = 'Bungie' AND Class = 'Hunter';
+
+-- Insert character name tracking per game
+INSERT INTO GameName (Title, Studio, CharName)
+VALUES ('Destiny 2', 'Bungie', 'Exo');
+
+-- Update character name
+UPDATE GameName
+SET CharName = 'Human'
+WHERE Title = 'Destiny 2' AND Studio = 'Bungie' AND CharName = 'Exo';
+
+-- Insert account-level statistics
+INSERT INTO AccountStats (AccountID, Title, Studio, Stats)
+VALUES (1, 'Destiny 2', 'Bungie', 'Light Level 2011');
+
+-- Update account-level statistics
+UPDATE AccountStats
+SET Stats = 'Light Level 2035'
+WHERE AccountID = 1 AND Title = 'Destiny 2' AND Studio = 'Bungie';
+
+-- Insert an inventory record for a character
+INSERT INTO Inventory (AccountID, Studio, Title, CharName, ItemID)
+VALUES (1, 'Bungie', 'Destiny 2', 'Exo', 301);
+
+-- Update inventory to reflect new item
+UPDATE Inventory
+SET ItemID = 302
+WHERE AccountID = 1 AND CharName = 'Exo' AND ItemID = 301;
+
+-- Insert a stat type definition
+INSERT INTO StatTypes (Studio, Title, StatName, Description)
+VALUES ('Bungie', 'Destiny', 'Resilience', 'Affects total health');
+
+-- Update stat type description
+UPDATE StatTypes
+SET Description = 'Sets shield health'
+WHERE Studio = 'Bungie' AND Title = 'Destiny' AND StatName = 'Resilience';
+
+-- Insert a character stat
+INSERT INTO CharacterStats (AccountID, Studio, Title, CharName, StatName, StatValue)
+VALUES (1, 'Bungie', 'Destiny 2', 'Exo', 'Resilience', 100.0);
+
+-- Update a character stat value
+UPDATE CharacterStats
+SET StatValue = 82.0
+WHERE AccountID = 1 AND CharName = 'Exo' AND StatName = 'Resilience';
