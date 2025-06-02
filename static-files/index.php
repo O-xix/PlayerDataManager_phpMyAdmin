@@ -1,3 +1,5 @@
+<!-- This is the main page. -->
+
 <?php
 /**
  * Created by PhpStorm.

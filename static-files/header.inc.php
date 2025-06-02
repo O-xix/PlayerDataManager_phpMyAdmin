@@ -7,6 +7,7 @@
  */
 ?>
 <!-- This is a common navigation base to call different web pages on the website -->
+ <!-- All of this is used for routing. -->
 <div class="topnav">
     <a href="index.php">Home</a>
     <a href="list_customers.php">List Customers</a>
