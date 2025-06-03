@@ -12,5 +12,6 @@
     <a href="index.php">Home</a>
     <a href="list_customers.php">List Customers</a>
     <a href="list_products.php">List Products</a>
+    <a href="insert.php">Insert</a>
 </div></div>
 <h1>Sample PHP Database Program</h1>
