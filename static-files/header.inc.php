@@ -10,7 +10,10 @@
  <!-- All of this is used for routing. -->
 <div class="topnav">
     <a href="index.php">Home</a>
-    <a href="list_customers.php">List Customers</a>
-    <a href="list_products.php">List Products</a>
+    <a href="insert_data.php">Insert Data</a>
+    <a href="delete_data.php">Delete Data</a>
+    <a href="list_data.php">List Data</a>
+    <a href="search.php">Search Data</a>
+    <a href="filter_account.php">Filter Account</a>
 </div></div>
 <h1>Sample PHP Database Program</h1>
