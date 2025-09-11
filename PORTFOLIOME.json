@@ -1,0 +1,17 @@
+{
+  "title": "Player Data Manager",
+  "subtitle": "Database system for tracking player builds and stats",
+  "description": "A MySQL + PHP project designed to track and analyze player builds, items, and game statistics across multiple titles. Supports CRUD operations, advanced queries, and secure database interaction. Normalized to 3NF and demonstrated with sample data from Destiny and Destiny 2.",
+  "technologies": [
+    "MySQL",
+    "PHP",
+    "SQL",
+    "Database Normalization",
+    "Linux"
+  ],
+  "links": {
+    "github": "https://github.com/O-xix/PlayerDataManager_phpMyAdmin",
+    "demo": ""
+  },
+  "thumbnail": "player-data-manager.png"
+}
