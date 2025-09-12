@@ -9,10 +9,10 @@
     "Database Normalization",
     "Linux"
   ],
+  "image": "/preview/playerdatamanager.png",
   "category": "School",
   "links": {
     "github": "https://github.com/O-xix/PlayerDataManager_phpMyAdmin",
     "demo": ""
-  },
-  "thumbnail": "player-data-manager.png"
+  }
 }
