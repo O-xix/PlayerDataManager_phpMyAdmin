@@ -1,6 +1,7 @@
 # Player Data Manager – Database Systems Project (CSS 475)
 
 This repository contains the design and implementation of the **Player Data Manager**, a conceptual database application created in a 5-person team for **CSS 475 (Database Systems)** at the University of Washington Bothell.  
+It is also currently deployed on the University's servers at https://students.washington.edu/snl9/index.php.
 
 ## 📖 Project Overview
 The **Player Data Manager** is a relational database designed to track and analyze **character builds, items, and game statistics** across different games. While our sample dataset focused on **Destiny** and **Destiny 2**, the system was designed to be extensible to other games.  
